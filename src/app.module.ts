@@ -1,14 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthService } from './auth/auth.service';
-import { CardsService } from './cards/cards.service';
-import { FilesService } from './files/files.service';
 import { CardsModule } from './cards/cards.module';
-import { CommonModule } from './common/common.module';
 import { AuthModule } from './auth/auth.module';
 import { ChatModule } from './chat/chat.module';
 import { FilesModule } from './files/files.module';
+import { OffersModule } from './offers/offers.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -30,12 +28,11 @@ import { FilesModule } from './files/files.module';
       synchronize: true,
     }),
     CardsModule,
-    CommonModule,
     AuthModule,
     FilesModule,
     ChatModule,
+    OffersModule,
+    SeedModule,
   ],
-  controllers: [],
-  providers: [AuthService, FilesService, CardsService],
 })
 export class AppModule {}

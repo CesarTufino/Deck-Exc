@@ -7,6 +7,7 @@ import {
   Req,
   Headers,
   SetMetadata,
+  Param,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto, LoginUserDto } from './dto';
@@ -17,6 +18,7 @@ import { IncomingHttpHeaders } from 'http';
 import { UserRoleGuard } from './guards/user-role/user-role.guard';
 import { RoleProtected } from './decorators/role-protected.decorator';
 import { ValidRoles } from './interfaces';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -32,6 +34,15 @@ export class AuthController {
     return this.authService.login(loginUserDto);
   }
 
+  @Post('reset')
+  resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+    return this.authService.resetPassword(resetPasswordDto);
+  }
+
+  @Get('question/:email')
+  getQuestion(@Param('email') email: string) {
+    return this.authService.getQuestion(email);
+  }
   /*
   @Get('private')
   @UseGuards(AuthGuard())

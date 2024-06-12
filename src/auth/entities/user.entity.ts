@@ -1,14 +1,15 @@
 import { IsBoolean, IsString } from 'class-validator';
-import { Card } from '../../cards/entities/card.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   Entity,
-  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   JoinTable,
 } from 'typeorm';
+import { Offer } from '../../offers/entities/index';
+import { Message } from 'src/chat/entities/message.entity';
 
 @Entity('user')
 export class User {
@@ -18,7 +19,9 @@ export class User {
   @Column('text', {
     unique: true,
   })
-  @IsString()
+  @Column('text', {
+    unique: true,
+  })
   email: string;
 
   @Column('text', {
@@ -29,22 +32,23 @@ export class User {
   @Column('text')
   name: string;
 
-  @Column('bool', {
-    default: true,
-  })
-  isActive: boolean;
-
   @Column('text', {
     array: true,
     default: ['user'],
   })
   roles: string[];
 
-  @ManyToMany(() => Card, (card) => card.users, {
-    cascade: true,
-  })
-  @JoinTable()
-  cards: Card[];
+  @OneToMany(() => Offer, (offer) => offer.user)
+  offers: Offer[];
+
+  @Column('text')
+  question: string;
+
+  @Column('text')
+  answer: string;
+
+  @OneToMany(() => Message, (message) => message.user)
+  messages: Message[];
 
   @BeforeInsert()
   checkFieldBeforeInsert() {

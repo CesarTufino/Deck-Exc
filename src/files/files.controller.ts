@@ -22,12 +22,9 @@ export class FilesController {
     private readonly configService: ConfigService,
   ) {}
 
-  @Get('product/:imageName')
-  findProductImage(
-    @Res() res: Response,
-    @Param('imageName') imageName: string,
-  ) {
-    const path = this.filesService.getStaticProductImage(imageName);
+  @Get('card/:imageName')
+  findImage(@Res() res: Response, @Param('imageName') imageName: string) {
+    const path = this.filesService.getStaticCardImage(imageName);
 
     // res.status(403).json({
     //   ok: false,
@@ -36,18 +33,18 @@ export class FilesController {
     res.sendFile(path);
   }
 
-  @Post('product')
+  @Post('card')
   @UseInterceptors(
     FileInterceptor('file', {
       fileFilter: fileFilter,
       //limits: { fileSize: 1000 },
       storage: diskStorage({
-        destination: './static/products',
+        destination: './static/cards',
         filename: fileNamer,
       }),
     }),
   )
-  uploadProductImage(@UploadedFile() file: Express.Multer.File) {
+  uploadImage(@UploadedFile() file: Express.Multer.File) {
     //console.log({ fileInContoller: file });
 
     if (!file) {
@@ -55,7 +52,7 @@ export class FilesController {
     }
 
     //const secureUrl = `${file.filename}`;
-    const secureUrl = `${this.configService.get('HOST_API')}/files/product/${file.filename}`;
+    const secureUrl = `${this.configService.get('HOST_API')}/files/cards/${file.filename}`;
 
     return { secureUrl };
   }

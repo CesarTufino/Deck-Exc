@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateChatDto } from './dto/create-chat.dto';
-import { UpdateChatDto } from './dto/update-chat.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Socket } from 'socket.io';
 import { User } from '../auth/entities/user.entity';
 import { Repository } from 'typeorm';
+import { Message } from './entities/message.entity';
+import { NewMessageDto } from './dto/new-message.dto';
 
 interface ConnectedClients {
   [id: string]: { socket: Socket; user: User };
@@ -17,12 +17,13 @@ export class ChatService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(Message)
+    private readonly messageRepository: Repository<Message>,
   ) {}
 
   async registerClient(client: Socket, userId: string) {
     const user = await this.userRepository.findOneBy({ id: userId });
     if (!user) throw new Error('User not found');
-    if (!user.isActive) throw new Error('User not active');
 
     this.checkUserConnection(user);
 
@@ -40,7 +41,7 @@ export class ChatService {
     return Object.keys(this.connectedClients);
   }
 
-  getUserFullName(socketId: string) {
+  getUserName(socketId: string) {
     return this.connectedClients[socketId].user.name;
   }
 
@@ -55,24 +56,20 @@ export class ChatService {
     }
   }
 
-  /*
-  create(createChatDto: CreateChatDto) {
-    return 'This action adds a new chat';
+  async saveMessage(client: Socket, payload: NewMessageDto) {
+    const user = this.connectedClients[client.id].user;
+    const message = this.messageRepository.create({
+      content: payload.message,
+      user,
+    });
+    await this.messageRepository.save(message);
+    return message;
   }
 
-  findAll() {
-    return `This action returns all chat`;
+  async getAllMessages(): Promise<Message[]> {
+    return this.messageRepository.find({
+      relations: ['user'],
+      order: { createdAt: 'ASC' },
+    });
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} chat`;
-  }
-
-  update(id: number, updateChatDto: UpdateChatDto) {
-    return `This action updates a #${id} chat`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} chat`;
-  }*/
 }
