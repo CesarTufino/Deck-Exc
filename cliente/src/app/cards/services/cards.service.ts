@@ -13,7 +13,7 @@ export class CardsService {
 
   constructor( private http: HttpClient) { }
 
-  getCards(): Observable<CardInterface[]>{
-    return this.http.get<CardInterface[]>(`${this.baseUrl}/cards`);
-  }
+  // getCards(): Observable<CardInterface[]>{
+  //   return this.http.get<CardInterface[]>(`${this.baseUrl}/cards`);
+  // }
 }

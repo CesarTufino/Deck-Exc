@@ -14,8 +14,8 @@ export class ListPageComponent implements OnInit {
   constructor(private cardSrv: CardsService) { }
 
   ngOnInit(): void {
-    this.cardSrv.getCards()
-    .subscribe(card => this.cards = card );
+    // this.cardSrv.getCards()
+    // .subscribe(card => this.cards = card );
     console.log(this.cards);
   }
 }

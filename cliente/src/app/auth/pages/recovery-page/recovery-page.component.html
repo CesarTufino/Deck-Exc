@@ -1,29 +1,39 @@
 <div class="card">
   <h1 class="text-center mt-5">Recuperar Contraseña</h1>
 
-  <mat-form-field class="ml-5 mr-5 mt-5">
+  <form class="text-center" [formGroup]="recoveryForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field class="mt-5">
     <mat-label>Correo electr&oacute;nico</mat-label>
-    <input type="text" matInput placeholder="Correo electr&oacute;nico">
+    <input type="email" matInput formControlName="email" placeholder="Correo electr&oacute;nico">
+    <mat-hint *ngIf="isValidField('email')" class="text-danger">Correo no valido</mat-hint>
   </mat-form-field>
+  <br>
 
-  <mat-form-field class="ml-5 mr-5">
-    <mat-label>Pregunta de Emergencia</mat-label>
-    <input type="text" matInput placeholder="Respuesta de emergencia">
-  </mat-form-field>
-
-  <mat-form-field class="ml-5 mr-5">
+  <mat-form-field>
     <mat-label>Nueva Contraseña</mat-label>
-    <input type="text" matInput placeholder="Nueva Contraseña">
+    <input type="password" matInput formControlName="password" placeholder="Nueva Contraseña">
+    <mat-hint *ngIf="isValidField('password')" class="text-danger">Ingresar nueva contraseña</mat-hint>
+  </mat-form-field>
+  <br>
+
+  <span>Pregunta de emergencia</span>
+  <br>
+  <mat-form-field>
+    <mat-label>Pregunta de Emergencia</mat-label>
+    <input type="text" matInput formControlName="question" placeholder="Respuesta de emergencia">
+    <mat-hint *ngIf="isValidField('question')" class="text-danger">Ingresar respuesta</mat-hint>
   </mat-form-field>
 
   <div class="p-4 text-center">
-    <button mat-flat-button color="primary">
+    <button mat-flat-button color="primary" type="submit">
       <mat-icon>save</mat-icon>
       Guardar
     </button>
   </div>
+</form>
 
   <div class="flex justify-content-end p-2">
     <a routerLink="/auth/login" class="btn btn-sm btn-success">Tengo cuenta</a>
-    </div>
+  </div>
 </div>
