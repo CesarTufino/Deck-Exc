@@ -44,7 +44,7 @@ export class RegisterPageComponent {
     .subscribe(
       (data) => {
         console.log("Cuenta creada", data);
-        this.snackBar.open("Cuenta creada con exito!", '', {duration:3000})
+        this.snackBar.open("Cuenta creada con exito!", '', {duration:5000})
         this.router.navigate(['./auth/login'])
         this.errorMessage = '';
       },
