@@ -15,7 +15,7 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
-    origin: 'https://poner_la_direccion_del_front_end',
+    origin: 'http://localhost:4200',
   });
   const port = process.env.PORT || 3000;
   await app.listen(port);
