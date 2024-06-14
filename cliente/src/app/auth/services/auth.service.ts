@@ -48,6 +48,14 @@ export class AuthService {
     return of(true)
   }
 
+  getQuestion(email: string){
+    return this.http.get(`${this.baseUrl}/auth/question/${email}`);
+  }
+
+  recoveryPassword(email: string, answer: string, password: string){
+    return this.http.post(`${this.baseUrl}/auth/reset`, { email, answer, password });
+  }
+
   logout() {
     this.user = undefined;
     sessionStorage.clear();
