@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidatorsService } from '../../../shared/services/validators.service';
+import { ValidatorsService, containsNumberValidator, containsUpperCaseValidator } from '../../../shared/services/validators.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ export class LoginPageComponent implements OnInit{
   public errorMessage: string = '';
   public loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(this.validatorSrv.emailPattern)]],
-    password: ['', [Validators.required ]]
+    password: ['', [Validators.required, containsNumberValidator(), containsUpperCaseValidator(), Validators.minLength(6) ]]
   })
 
   constructor(

@@ -13,7 +13,7 @@
       <mat-form-field class="mt-3">
         <mat-label>Contraseña</mat-label>
         <input type="password" matInput formControlName="password" placeholder="Correo electr&oacute;nico" value="password">
-        <mat-hint *ngIf="isValidField('password')" class="text-danger">Ingrese contraseña</mat-hint>
+        <mat-hint *ngIf="isValidField('password')" class="text-danger">Contraseña debe ser de m&iacute;nimo 6 caracteres</mat-hint>
     </mat-form-field>
 
     <div class="p-4 text-center">
