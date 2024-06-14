@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule } from '@angular/common/http';
+import { Error404PageComponent } from './shared/pages/error404-page/error404-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Error404PageComponent
   ],
   imports: [
     BrowserModule,
