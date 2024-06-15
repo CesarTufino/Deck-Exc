@@ -16,8 +16,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   get currectUser(): User|undefined {
-    console.log('user',this.user);
-
     if(!this.user) return undefined;
     return structuredClone( this.user );
   }

@@ -43,13 +43,11 @@ export class RegisterPageComponent {
     this.authSrv.register(email, name, password, question, answer)
     .subscribe(
       (data) => {
-        console.log("Cuenta creada", data);
         this.snackBar.open("Cuenta creada con exito!", '', {duration:5000})
         this.router.navigate(['./auth/login'])
         this.errorMessage = '';
       },
       (error) => {
-        console.log("Error" , error);
         this.errorMessage = 'Credenciales incorrectas. Intentalo de nuevo'
       }
     )
