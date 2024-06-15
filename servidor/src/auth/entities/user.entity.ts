@@ -1,4 +1,3 @@
-import { IsBoolean, IsString } from 'class-validator';
 import {
   BeforeInsert,
   BeforeUpdate,
@@ -10,6 +9,7 @@ import {
 } from 'typeorm';
 import { Offer } from '../../offers/entities/index';
 import { Message } from 'src/chat/entities/message.entity';
+import { Question } from '../enum/question.enum';
 
 @Entity('user')
 export class User {
@@ -41,8 +41,11 @@ export class User {
   @OneToMany(() => Offer, (offer) => offer.user)
   offers: Offer[];
 
-  @Column('text')
-  question: string;
+  @Column({
+    type: 'enum',
+    enum: Question,
+  })
+  question: Question;
 
   @Column('text')
   answer: string;
