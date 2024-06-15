@@ -1,1 +1,69 @@
-<p>new-page works!</p>
+<!-- si existe el heroe (editar) muestra 'Editar', caso contrario 'Agregar' -->
+<h1 class="mt-5">
+  <strong>
+    {{ currentCard.id ? 'Editar' : 'Agregar' }}
+  </strong>
+  <small *ngIf="currentCard.id">
+    {{currentCard.card.name}}
+  </small>
+</h1>
+
+<mat-divider class="mb-2"></mat-divider>
+
+<div class="grid">
+  <!-- Bloque del formulario -->
+  <div class="col-6" sm:col-6>
+    <mat-card>
+      <mat-card-content>
+
+        <!-- formulario
+        se manda el nombre del formGroup
+        se manda el metodo que realiza (UPDATE o CREATE) -->
+        <form class="grid" [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+
+          <!-- Campo del formulario -->
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Condici&oacute;n</mat-label>
+            <!-- matInput: Angular Material
+            required: que sea obligatorio
+            formControlName: se apunta al campo que se va a editar del FormGroup -->
+            <input matInput type="text" required formControlName="condition">
+          </mat-form-field>
+
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Precio</mat-label>
+            <input matInput type="text" required formControlName="price">
+          </mat-form-field>
+
+        </form>
+
+        <div class="flex justify-content-between">
+          <!-- Si existe heroe no se va a mostrar el boton -->
+          <button mat-raised-button color="warn" *ngIf="currentCard.price" (click)="onDeleteHero()">
+            <mat-icon>delete</mat-icon>
+            Borrar
+          </button>
+
+          <span></span>
+
+          <button mat-raised-button color="primary" (click)="onSubmit()">
+            <mat-icon>save</mat-icon>
+            Guardar
+          </button>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- <div class="col-6 sm:col-6">
+    <mat-card>
+      <img [src]="currentCard.card.imageUrl" alt="imagen de la tarjeta" mat-card-image>
+    </mat-card>
+  </div> -->
+</div>
+
+
+<pre>
+  {{currentCard | json}}
+</pre>
