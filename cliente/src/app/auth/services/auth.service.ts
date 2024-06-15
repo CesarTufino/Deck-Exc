@@ -26,7 +26,7 @@ export class AuthService {
     return this.http.post<User>(`${this.baseUrl}/auth/login`, { email, password })
       .pipe(
         map((data: User) => {
-          sessionStorage.setItem('token', data.token);
+          localStorage.setItem('token', data.token);
           this.tokenLogin=data.token;
           this.user=data
           return data;
@@ -39,8 +39,8 @@ export class AuthService {
   }
 
   checkAuthentication():Observable<boolean>{
-    if(!sessionStorage.getItem('token')) return of(false);
-    // if(this.tokenLogin === sessionStorage.getItem('token')){
+    if(!localStorage.getItem('token')) return of(false);
+    // if(this.tokenLogin === localStorage.getItem('token')){
     //   return of(true)
     // }else{
     //   return of(false)
@@ -58,6 +58,6 @@ export class AuthService {
 
   logout() {
     this.user = undefined;
-    sessionStorage.clear();
+    localStorage.clear();
   }
 }

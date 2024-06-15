@@ -25,8 +25,19 @@ export class LoginPageComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-      sessionStorage.clear()
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token !== null) {
+        localStorage.removeItem('token');
+        console.log('Token eliminado del localStorage');
+      } else {
+        console.log('No se encontró ningún token en el localStorage');
+      }
+    } else {
+      console.log('localStorage no está disponible');
+    }
   }
+
 
   isValidField( field:string ){
     return this.validatorSrv.isValidField( this.loginForm, field)

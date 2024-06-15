@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { Error404PageComponent } from './shared/pages/error404-page/error404-page.component';
 
 @NgModule({
@@ -20,7 +20,8 @@ import { Error404PageComponent } from './shared/pages/error404-page/error404-pag
     HttpClientModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })
