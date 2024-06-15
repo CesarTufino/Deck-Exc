@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MyListComponent } from './pages/my-list/my-list.component';
 import { MyCardComponent } from './components/my-card/my-card.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { EditPageComponent } from './pages/edit-page/edit-page.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     NewPageComponent,
     MyListComponent,
     MyCardComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    EditPageComponent
   ],
   imports: [
     CommonModule,
