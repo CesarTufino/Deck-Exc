@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CardInterface } from '../../../interfaces/card.interface';
 import { CardsService } from '../../services/cards.service';
 import { OffersInterface } from '../../../interfaces/oferta.interface';
-import { error } from 'console';
 
 @Component({
   selector: 'app-card',
@@ -11,7 +9,7 @@ import { error } from 'console';
 })
 export class CardComponent implements OnInit{
 
-  public imagenRuta: string = '/cliente/src/assets/cards/';
+  public imagenRuta: string = 'assets/cards/';
 
   constructor(private cardSrv: CardsService){}
 
