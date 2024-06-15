@@ -9,6 +9,9 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MyListComponent } from './pages/my-list/my-list.component';
+import { MyCardComponent } from './components/my-card/my-card.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     LayoutPageComponent,
     CardPageComponent,
     ListPageComponent,
-    NewPageComponent
+    NewPageComponent,
+    MyListComponent,
+    MyCardComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
