@@ -1,27 +1,27 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title class="p-2"> {{card.nombre}} </mat-card-title>
+    <mat-card-title class="p-2"> {{offers.card.name}} </mat-card-title>
   </mat-card-header>
+<img src="/cliente/src/assets/cards/" alt="">
+  <img mat-card-image [src]="imagenRuta" [alt]="offers.card.name" class="p-2">
 
-  <img mat-card-image [src]="card.imagen" [alt]="card.nombre" class="p-2">
-
-  <mat-card-content class="mt-2">
-    <p><strong>Descripci&oacute;n:</strong> {{card.descripcion}} </p>
-    <h3><strong>Estado:</strong> {{card.estado}}</h3>
-    <h3><strong>Precio: </strong>${{card.precio}}</h3>
-  </mat-card-content>
+  <!-- <mat-card-content class="mt-2">
+    <p><strong>Descripci&oacute;n:</strong> {{offers.descripcion}} </p>
+    <h3><strong>Estado:</strong> {{offers.estado}}</h3>
+    <h3><strong>Precio: </strong>${{offers.precio}}</h3>
+  </mat-card-content> -->
 
   <mat-divider></mat-divider>
 
   <mat-card-actions>
-    <button mat-button mat-raised color="primary" [routerLink]="['/cards/edit', card.id]">
+    <button mat-button mat-raised color="primary" [routerLink]="['/cards/edit', offers.id]">
       <mat-icon matListItemIcon>shopping_cart</mat-icon>
       Comprar
     </button>
 
     <span class="spacer"></span>
 
-    <button mat-button mat-raised color="primary" [routerLink]="['/cards/', card.id]">
+    <button mat-button mat-raised color="primary" [routerLink]="['/cards/', offers.id]">
       <mat-icon matListItemIcon>more_horiz</mat-icon>
       Mas
     </button>
