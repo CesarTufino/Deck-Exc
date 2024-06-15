@@ -62,7 +62,6 @@ export class OffersService {
       where: {
         user: { id: user.id },
       },
-      relations: ['user'],
     });
     return offers;
   }

@@ -18,7 +18,7 @@ export class Offer {
   @ManyToOne(() => User, (user) => user.offers, { eager: true })
   user: User;
 
-  @OneToOne(() => Card)
+  @OneToOne(() => Card, { eager: true })
   @JoinColumn()
   card: Card;
 
