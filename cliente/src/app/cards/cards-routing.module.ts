@@ -5,6 +5,7 @@ import { NewPageComponent } from './pages/new-page/new-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { CardPageComponent } from './pages/card-page/card-page.component';
 import { MyListComponent } from './pages/my-list/my-list.component';
+import { EditPageComponent } from './pages/edit-page/edit-page.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     component: LayoutPageComponent,
     children: [
       { path: 'new-card', component: NewPageComponent },
-      { path: 'edit/:id', component: NewPageComponent },
+      { path: 'edit/:id', component: EditPageComponent },
       { path: 'list', component: ListPageComponent },
       { path: 'my-list', component: MyListComponent },
       { path: ':id', component: CardPageComponent },
