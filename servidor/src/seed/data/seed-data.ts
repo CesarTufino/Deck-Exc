@@ -5,8 +5,14 @@ interface SeedUser {
   name: string;
   password: string;
   roles: string[];
-  question: string;
+  question: Question;
   answer: string;
+}
+
+enum Question{
+  COMIDA = "Comida",
+  CANTANTE = "Cantante",
+  PAIS = "País",
 }
 
 interface SeedCard {
@@ -28,7 +34,7 @@ export const initialData: SeedData = {
       name: 'Test One',
       password: bcrypt.hashSync('Abc123', 10),
       roles: ['user'],
-      question: 'Pais favorito?',
+      question: Question.PAIS,
       answer: bcrypt.hashSync('Argentina', 10),
     },
     {
@@ -36,7 +42,7 @@ export const initialData: SeedData = {
       name: 'Test Two',
       password: bcrypt.hashSync('Abc123', 10),
       roles: ['user', 'admin'],
-      question: 'Pais favorito?',
+      question: Question.PAIS,
       answer: bcrypt.hashSync('Argentina', 10),
     },
   ],

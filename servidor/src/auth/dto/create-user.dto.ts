@@ -1,10 +1,12 @@
 import {
   IsEmail,
+  IsEnum,
   IsString,
   Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { Question } from '../enum/question.enum';
 
 export class CreateUserDto {
   @IsString()
@@ -24,9 +26,8 @@ export class CreateUserDto {
   @MinLength(1)
   name: string;
 
-  @IsString()
-  @MinLength(1)
-  question: string;
+  @IsEnum(Question)
+  question: Question;
 
   @IsString()
   @MinLength(1)
