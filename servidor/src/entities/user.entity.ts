@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
   JoinTable,
 } from 'typeorm';
-import { Offer } from '../../offers/entities/index';
-import { Message } from 'src/chat/entities/message.entity';
+import { Offer } from './offer.entity';
+import { Message } from './message.entity';
 import { Question } from '../enum/question.enum';
 
 @Entity('user')

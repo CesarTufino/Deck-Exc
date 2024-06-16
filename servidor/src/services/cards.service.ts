@@ -5,11 +5,11 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateCardDto } from './dto/create-card.dto';
-import { UpdateCardDto } from './dto/update-card.dto';
-import { User } from '../auth/entities/user.entity';
+import { CreateCardDto } from '../dto';
+import { UpdateCardDto } from '../dto';
+import { User } from '../entities';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Card } from './entities/card.entity';
+import { Card } from '../entities';
 import { Repository } from 'typeorm';
 import { validate as isUUID } from 'uuid';
 

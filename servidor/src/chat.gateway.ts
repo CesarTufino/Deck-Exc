@@ -6,11 +6,11 @@ import {
   WebSocketServer,
   MessageBody,
 } from '@nestjs/websockets';
-import { ChatService } from './chat.service';
+import { ChatService } from './services/chat.service';
 import { Server, Socket } from 'socket.io';
 import { NewMessageDto } from './dto/new-message.dto';
 import { JwtService } from '@nestjs/jwt';
-import { JwtPayLoad } from 'src/auth/interfaces';
+import { JwtPayLoad } from './interfaces';
 
 @WebSocketGateway({ cors: true }) // namespace: '/'
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {

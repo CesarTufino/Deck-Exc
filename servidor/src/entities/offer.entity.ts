@@ -6,8 +6,8 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../../auth/entities/user.entity';
-import { Card } from '../../cards/entities/card.entity';
+import { User } from './user.entity';
+import { Card } from './card.entity';
 import { OfferCondition } from './offer-condition.enum';
 
 @Entity({ name: 'offer' })

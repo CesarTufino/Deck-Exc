@@ -1,14 +1,33 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { AuthService } from './services/auth.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CardsModule } from './cards/cards.module';
-import { AuthModule } from './auth/auth.module';
-import { ChatModule } from './chat/chat.module';
-import { FilesModule } from './files/files.module';
-import { OffersModule } from './offers/offers.module';
-import { SeedModule } from './seed/seed.module';
+import { User, Card, Message, Offer } from './entities';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtStrategy } from './strategies/jwt.strategy';
+import { CardsService } from './services/cards.service';
+import { AppController } from './app.controller';
+import { ChatService } from './services/chat.service';
+import { ChatGateway } from './chat.gateway';
+import { FilesService } from './services/files.service';
+import { OffersService } from './services/offers.service';
+import { SeedService } from './services/seed.service';
 
 @Module({
+  controllers: [AppController],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    CardsService,
+    ChatGateway,
+    ChatService,
+    FilesService,
+    OffersService,
+    OffersService,
+    SeedService,
+  ],
+  exports: [TypeOrmModule, JwtStrategy, PassportModule, JwtModule],
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
@@ -27,12 +46,26 @@ import { SeedModule } from './seed/seed.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    CardsModule,
-    AuthModule,
-    FilesModule,
-    ChatModule,
-    OffersModule,
-    SeedModule,
+    ConfigModule,
+    TypeOrmModule.forFeature([User]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        // console.log('JWT Secret', configService.get('JWT_SECRET'));
+        // console.log('JWT SECRET', process.env.JWT_SECRET);
+        return {
+          secret: configService.get('JWT_SECRET'),
+          signOptions: {
+            expiresIn: '2h',
+          },
+        };
+      },
+    }),
+    TypeOrmModule.forFeature([Card]),
+    TypeOrmModule.forFeature([Message]),
+    TypeOrmModule.forFeature([Offer]),
   ],
 })
 export class AppModule {}

@@ -5,15 +5,15 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateOfferDto } from './dto/create-offer.dto';
-import { UpdateOfferDto } from './dto/update-offer.dto';
-import { User } from '../auth/entities/user.entity';
+import { CreateOfferDto } from '../dto';
+import { UpdateOfferDto } from '../dto';
+import { User } from '../entities';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Offer } from './entities';
+import { Offer } from '../entities';
 import { Repository } from 'typeorm';
 import { validate as isUUID } from 'uuid';
-import { CardsService } from '../cards/cards.service';
-import { AuthService } from '../auth/auth.service';
+import { CardsService } from './cards.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class OffersService {

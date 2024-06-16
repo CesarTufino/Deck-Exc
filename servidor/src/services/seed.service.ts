@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../auth/entities/user.entity';
-import { OffersService } from '../offers/offers.service';
+import { User } from '../entities';
+import { OffersService } from './offers.service';
 import { Repository } from 'typeorm';
-import { CardsService } from '../cards/cards.service';
-import { initialData } from './data/seed-data';
+import { CardsService } from './cards.service';
+import { initialData } from '../data/seed-data';
 
 @Injectable()
 export class SeedService {

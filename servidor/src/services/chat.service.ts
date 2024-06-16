@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Socket } from 'socket.io';
-import { User } from '../auth/entities/user.entity';
+import { User } from '../entities';
 import { Repository } from 'typeorm';
-import { Message } from './entities/message.entity';
-import { NewMessageDto } from './dto/new-message.dto';
+import { Message } from '../entities';
+import { NewMessageDto } from '../dto';
 
 interface ConnectedClients {
   [id: string]: { socket: Socket; user: User };
