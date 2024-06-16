@@ -33,7 +33,11 @@
 
           <mat-form-field class="col-12 col-sm-6">
             <mat-label>Condici&oacute;n</mat-label>
-            <input matInput type="text" required formControlName="condition">
+            <mat-select required formControlName="condition">
+              <mat-option value="Excelente">Excelente</mat-option>
+              <mat-option value="Usado">Usado</mat-option>
+              <mat-option value="Nuevo">Nuevo</mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field class="col-12 col-sm-6">
