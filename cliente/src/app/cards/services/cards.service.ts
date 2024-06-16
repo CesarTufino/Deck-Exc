@@ -78,6 +78,10 @@ export class CardsService {
       )
   }
 
+  logout() {
+    localStorage.clear();
+  }
+
   private _isOpen = false;
 
   get isOpen(): boolean {
