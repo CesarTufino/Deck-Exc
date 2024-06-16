@@ -50,20 +50,20 @@ export class CardsService {
       )
   }
 
-  addOffer( offer: OffersInterface): Observable<OffersInterface>{
+  addOffer( cardId:string, description:string, condition:string, price:number): Observable<any>{
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     })
-    return this.http.post<OffersInterface>(`${this.baseUrl}/offers`, offer, { headers })
+    return this.http.post<any>(`${this.baseUrl}/offers`, {cardId, description, condition, price }, { headers })
   }
 
-  updateOfferById(offer: OffersInterface): Observable<OffersInterface>{
+  updateOfferById(cardId:string, condition:string, price:number): Observable<any>{
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     })
-    return this.http.patch<OffersInterface>(`${this.baseUrl}/offers/${offer.id}`, offer, { headers })
+    return this.http.patch<any>(`${this.baseUrl}/offers/${cardId}`,{condition, price}, { headers })
   }
 
   deleteOfferById( id: string):Observable<boolean>{

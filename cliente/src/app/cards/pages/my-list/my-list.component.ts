@@ -17,7 +17,6 @@ export class MyListComponent implements OnInit{
     this.cardSrv.getMyOffers()
     .subscribe(offer => {
       this.myOffers = offer
-      console.log(this.myOffers);
     },
     error => {
       console.log(error);

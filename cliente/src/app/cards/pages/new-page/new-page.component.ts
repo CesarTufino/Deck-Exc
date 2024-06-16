@@ -3,21 +3,22 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { CardsService } from '../../services/cards.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
 import { OffersInterface } from '../../../interfaces/oferta.interface';
-import { filter, switchMap } from 'rxjs';
-import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { switchMap } from 'rxjs';
+import { CardInterface } from '../../../interfaces/card.interface';
 
 @Component({
   selector: 'app-new-page',
   templateUrl: './new-page.component.html',
   styleUrl: './new-page.component.css'
 })
-export class NewPageComponent implements OnInit{
+export class NewPageComponent implements OnInit {
 
-   // Formulario reactivo
-   public cardForm = new FormGroup({
-    condition: new FormControl<string>(''),
+  // Formulario reactivo
+  public cardForm = new FormGroup({
+    cardId: new FormControl<string>('', { nonNullable: true }),
+    description: new FormControl<string>('', { nonNullable: true }),
+    condition: new FormControl<string>('', { nonNullable: true }),
     price: new FormControl<number>(0, { nonNullable: true }),
   });
 
@@ -27,86 +28,62 @@ export class NewPageComponent implements OnInit{
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private snackbar: MatSnackBar,
-    private dialog: MatDialog
-  ){}
+  ) { }
 
   get currentCard(): OffersInterface {
     const card = this.cardForm.value as OffersInterface;
     return card;
   }
 
+  public card!: any
+  public cards: CardInterface[] = [];
   // Se velida si es nuevo registro o se va a editar
   // En caso de editarse va a cargar la informacion del personaje
   ngOnInit(): void {
-      if( !this.router.url.includes('edit')){
-        return;
-      }
-      this.activatedRoute.params
+    this.cardSrv.getCards()
+    .subscribe( card => {
+      this.cards = card;
+    },
+  error => {
+    console.log('Error al obtener las tarjetas:', error);
+  })
+
+    if (!this.router.url.includes('edit')) {
+      return;
+    }
+    this.activatedRoute.params
       .pipe(
-        switchMap( ({ id }) => this.cardSrv.getOfferById(id) )
-      ).subscribe( card => {
-          if( !card ){
-            return this.router.navigateByUrl('/');
-          }
-          this.cardForm.reset(card);
-          return;
-        })
+        switchMap(({ id }) => this.cardSrv.getOfferById(id))
+      ).subscribe(card => {
+        if (!card) {
+          return this.router.navigateByUrl('/');
+        }
+        this.card = card
+        this.cardForm.reset(card);
+        return;
+      })
   }
 
   // Para cuando se envie el formulario
   onSubmit(): void {
-    console.log(this.cardForm.invalid);
-    console.log(this.cardForm.value);
-    if ( this.cardForm.invalid ) return;
+    // if (this.cardForm.invalid) return;
+    const cardId = this.cardForm.controls['cardId'].value
+    const description = this.cardForm.controls['description'].value
+    const condition = this.cardForm.controls['condition'].value
+    const price = this.cardForm.controls['price'].value
+    this.cardSrv.addOffer(cardId, description, condition, price)
 
-    // Si tiene un id va a actualizar el registro
-    if (this.currentCard.id) {
-      this.cardSrv.updateOfferById(this.currentCard)
       .subscribe(card => {
-          this.showSnackbar(`${card.card.name} actualizado!`);
-        });
-      return;
-    }
-    // si no hay id, se quiere crear nuevo registro
-    this.cardSrv.addOffer( this.currentCard )
-
-    .subscribe( card => {
         // Navegara a la pagina de edicion del nuevo heroe
         this.router.navigate(['/cards/edit', card.id])
-        this.showSnackbar(`${card.card.name } creado!`)
+        this.showSnackbar(`${this.card.card.name} creado!`)
+        console.log('creado');
+
       })
-  }
-
-  onDeleteHero(){
-    if( !this.currentCard.id) throw Error('Hero id is required');
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: this.cardForm.value
-    });
-
-    dialogRef.afterClosed()
-      .pipe(
-        filter( (result: boolean) => result ),
-        switchMap(() => this.cardSrv.deleteOfferById(this.currentCard.id)),
-        filter( (wasDeleted: boolean) => wasDeleted ),
-      )
-      .subscribe(result => {
-        this.router.navigate(['/heroes']);
-      })
-
-      // FUNCIONA PERO NO ES LO ADECUADO, VER LO DE ARRIBA
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if( !result ) return;
-    //   this.heroService.deleteHeroById(this.currentHero.id)
-    //     .subscribe(wasDeleted => {
-    //       if(wasDeleted)
-    //         this.router.navigate(['/heroes']);
-    //     })
-    // });
   }
 
   // SnackBar
-  showSnackbar(message: string): void{
+  showSnackbar(message: string): void {
     this.snackbar.open(message, 'done', {
       duration: 2500,
     })

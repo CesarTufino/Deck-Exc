@@ -76,18 +76,15 @@ export class RecoveryPageComponent implements OnInit {
     const email = this.emailForm.controls['email'].value;
     const answer = this.recoveryForm.controls['answer'].value;
     const newPassword = this.recoveryForm.controls['newPassword'].value;
-console.log(email, answer, newPassword);
 
     this.authSrv.recoveryPassword(email, answer, newPassword)
     .subscribe(
       (data) => {
-        console.log("Cuenta creada", data);
         this.snackBar.open("Contraseña restablecida con éxito!", '', {duration:5000})
         this.router.navigate(['./auth/login'])
         this.errorMessage = '';
       },
       (error) => {
-        console.log("Error" , error);
         this.errorMessage = 'Credenciales incorrectas. Intentalo de nuevo'
       }
     )
