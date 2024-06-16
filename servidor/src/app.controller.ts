@@ -42,6 +42,11 @@ export class AppController {
     private readonly seedService: SeedService,
   ) {}
 
+  @Get('auth/users')
+  findAllUser() {
+    return this.authService.findAll();
+  }
+
   @Post('auth/register')
   createUser(@Body() createUserDto: CreateUserDto) {
     return this.authService.create(createUserDto);

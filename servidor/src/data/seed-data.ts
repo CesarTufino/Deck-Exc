@@ -9,10 +9,10 @@ interface SeedUser {
   answer: string;
 }
 
-enum Question{
-  COMIDA = "comida",
-  CANTANTE = "cantante",
-  PAIS = "pais",
+enum Question {
+  COMIDA = 'comida',
+  CANTANTE = 'cantante',
+  PAIS = 'pais',
 }
 
 interface SeedCard {
@@ -20,11 +20,23 @@ interface SeedCard {
   imageUrl: string;
 }
 
-type OfferCondition = 'Excelente' | 'Usado' | 'Nuevo';
+interface SeedOffer {
+  cardId: string;
+  description: string;
+  condition: OfferCondition;
+  price: number;
+}
+
+enum OfferCondition {
+  EXCELENTE = 'Excelente',
+  USADO = 'Usado',
+  NUEVO = 'Nuevo',
+}
 
 interface SeedData {
   cards: SeedCard[];
   users: SeedUser[];
+  offers: SeedOffer[];
 }
 
 export const initialData: SeedData = {
@@ -48,16 +60,30 @@ export const initialData: SeedData = {
   ],
   cards: [
     {
-      name: 'Carta 1',
+      name: 'Charizard',
       imageUrl: 'charizard.png',
     },
     {
-      name: 'Carta 2',
+      name: 'Mago Oscuro',
       imageUrl: 'mago_oscuro.png',
     },
     {
-      name: 'Carta 3',
+      name: 'Black Lotus',
       imageUrl: 'black_lotus.png',
+    },
+  ],
+  offers: [
+    {
+      cardId: '',
+      description: 'Vendo carta',
+      condition: OfferCondition.EXCELENTE,
+      price: 1,
+    },
+    {
+      cardId: '',
+      description: 'Vendo carta',
+      condition: OfferCondition.NUEVO,
+      price: 99.99,
     },
   ],
 };

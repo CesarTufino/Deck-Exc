@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Socket } from 'socket.io';
 import { User } from '../entities';
@@ -71,5 +75,21 @@ export class ChatService {
       relations: ['user'],
       order: { createdAt: 'ASC' },
     });
+  }
+
+  async deleteAll() {
+    const query = this.messageRepository.createQueryBuilder('message');
+    try {
+      return await query.delete().where({}).execute();
+    } catch (error) {
+      this.handleDBExceptions(error);
+    }
+  }
+
+  private handleDBExceptions(error: any) {
+    if (error.code === '23505') throw new BadRequestException(error.detail);
+    throw new InternalServerErrorException(
+      'Unexpected error, check server log',
+    );
   }
 }
