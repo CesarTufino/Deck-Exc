@@ -19,9 +19,6 @@ export class User {
   @Column('text', {
     unique: true,
   })
-  @Column('text', {
-    unique: true,
-  })
   email: string;
 
   @Column('text', {

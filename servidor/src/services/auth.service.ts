@@ -57,7 +57,6 @@ export class AuthService {
 
     if (!user)
       throw new UnauthorizedException('Credentals are not valid (email)');
-
     if (!bcrypt.compareSync(password, user.password))
       throw new UnauthorizedException('Credentals are not valid (password)');
 
@@ -78,7 +77,7 @@ export class AuthService {
       throw new BadRequestException('Security answer is incorrect');
 
     // Actualizar la contraseña
-    user.password = password;
+    user.password = bcrypt.hashSync(password, 10);
     await this.userRepository.save(user);
 
     return { message: 'Password has been successfully updated.' };
