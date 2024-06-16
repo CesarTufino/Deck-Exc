@@ -21,6 +21,7 @@ export class RecoveryPageComponent implements OnInit {
   public recoveryControl: boolean = false;
   public question!: string;
   public errorMessage: string = '';
+  public errorMessageControl: string = '';
   public emailForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(this.validatorSrv.emailPattern)]],
   })
@@ -53,7 +54,7 @@ export class RecoveryPageComponent implements OnInit {
     this.emailForm.markAllAsTouched();
     this.authSrv.getQuestion(email)
       .subscribe((res: any) => {
-        this.errorMessage = ''
+        this.errorMessageControl = ''
         this.recoveryControl = true;
         switch (res.question) {
           case 'comida':
@@ -67,7 +68,7 @@ export class RecoveryPageComponent implements OnInit {
         }
       },
         (err: any) => {
-          this.errorMessage = 'Correo no encontrado, intente otra vez'
+          this.errorMessageControl = 'Correo no encontrado, intente otra vez'
         })
   }
 
@@ -76,6 +77,7 @@ export class RecoveryPageComponent implements OnInit {
     const email = this.emailForm.controls['email'].value;
     const answer = this.recoveryForm.controls['answer'].value;
     const newPassword = this.recoveryForm.controls['newPassword'].value;
+    console.log(email, answer, newPassword);
 
     this.authSrv.recoveryPassword(email, answer, newPassword)
     .subscribe(
