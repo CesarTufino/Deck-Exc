@@ -15,6 +15,10 @@
         Verificar correo electr&oacute;nico
       </button>
     </div>
+
+    <div *ngIf="errorMessageControl" class="text-danger text-center mb-4">
+      {{errorMessageControl}}
+    </div>
   </form>
 
 
