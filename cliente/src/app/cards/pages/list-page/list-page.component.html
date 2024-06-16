@@ -6,3 +6,9 @@
     <app-card [offers]="card"></app-card>
   </div>
 </div>
+
+<button mat-fab *ngIf="!isOpen" class="chat-button" (click)="openChat()">
+  <mat-icon>chat</mat-icon>
+</button>
+
+<app-chat *ngIf="isOpen"></app-chat>

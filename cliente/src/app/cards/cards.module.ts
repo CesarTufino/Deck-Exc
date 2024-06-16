@@ -13,7 +13,7 @@ import { MyListComponent } from './pages/my-list/my-list.component';
 import { MyCardComponent } from './components/my-card/my-card.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
-
+import { ChatModule } from '../chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { EditPageComponent } from './pages/edit-page/edit-page.component';
     CommonModule,
     CardsRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChatModule
   ]
 })
 export class CardsModule { }
