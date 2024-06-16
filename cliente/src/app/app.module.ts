@@ -11,7 +11,7 @@ import { Error404PageComponent } from './shared/pages/error404-page/error404-pag
 @NgModule({
   declarations: [
     AppComponent,
-    Error404PageComponent
+    Error404PageComponent,
   ],
   imports: [
     BrowserModule,

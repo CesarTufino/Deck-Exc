@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MyListComponent } from './pages/my-list/my-list.component';
 import { MyCardComponent } from './components/my-card/my-card.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ChatModule } from '../chat/chat.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     CommonModule,
     CardsRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChatModule
   ]
 })
 export class CardsModule { }

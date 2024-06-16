@@ -34,4 +34,16 @@ export class ListPageComponent implements OnInit {
       console.log(error);
     })
   }
+
+  get isOpen(): boolean {
+    return this.cardSrv.isOpen
+  }
+
+  openChat(): void {
+    this.cardSrv.isOpen = true;
+  }
+
+  closeChat(): void {
+    this.cardSrv.isOpen = false;
+  }
 }

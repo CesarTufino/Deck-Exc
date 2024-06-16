@@ -77,4 +77,15 @@ export class CardsService {
         catchError( err => of(false))
       )
   }
+
+  private _isOpen = false;
+
+  get isOpen(): boolean {
+    return this._isOpen;
+  }
+
+  set isOpen(isOpen: boolean) {
+    this._isOpen = isOpen;
+  }
+
 }
