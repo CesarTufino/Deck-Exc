@@ -1,6 +1,6 @@
-  <h1 class="text-center mt-5">Recuperar Contraseña</h1>
+  <h1 class="mt-5">Recuperar Contraseña</h1>
 
-  <form class="text-center" [formGroup]="emailForm" (ngSubmit)="emailControl(emailForm.controls['email'].value)" *ngIf="!recoveryControl">
+  <form  [formGroup]="emailForm" (ngSubmit)="emailControl(emailForm.controls['email'].value)" *ngIf="!recoveryControl">
 
     <mat-form-field class="mt-5">
       <mat-label>Correo electr&oacute;nico</mat-label>
@@ -9,7 +9,7 @@
     </mat-form-field>
     <br>
 
-    <div class="p-4 text-center">
+    <div class="p-4 ">
       <button mat-flat-button color="primary" type="submit">
         <mat-icon>mail</mat-icon>
         Verificar correo electr&oacute;nico
@@ -18,7 +18,7 @@
   </form>
 
 
-  <form class="text-center" [formGroup]="recoveryForm" (ngSubmit)="onSubmit()" *ngIf="recoveryControl">
+  <form  [formGroup]="recoveryForm" (ngSubmit)="onSubmit()" *ngIf="recoveryControl">
     <h4>Recuperar de: <strong> {{emailForm.controls['email'].value}} </strong></h4>
     <br>
     <h4 class="text-start ml-5">{{question}}</h4>
@@ -35,21 +35,17 @@
     </mat-form-field>
     <br>
 
-    <div *ngIf="errorMessage" class="text-danger text-center mb-4">
+    <div *ngIf="errorMessage" class="text-danger  mb-4">
       {{errorMessage}}
     </div>
 
-    <div class="p-4 text-center">
+    <div class="p-4 ">
       <button mat-flat-button color="primary" type="submit">
         <mat-icon>save</mat-icon>
         Guardar
       </button>
     </div>
   </form>
-
-  <h1>Prueba:</h1>
-  <pre>{{recoveryForm.value |json}}</pre>
-  <pre>{{ emailForm.value | json}}</pre>
 
   <div class="flex justify-content-end p-2">
     <a routerLink="/auth/login" class="btn btn-sm btn-success">Tengo cuenta</a>

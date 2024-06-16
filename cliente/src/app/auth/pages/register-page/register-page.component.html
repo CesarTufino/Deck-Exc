@@ -1,6 +1,6 @@
-  <h1 class="text-center mt-5">Registrar</h1>
+  <h1 class=" mt-5">Registrar</h1>
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="text-center">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
 
     <mat-form-field class="mt-5">
       <mat-label>Nombre</mat-label>
@@ -40,17 +40,13 @@
       <mat-hint *ngIf="isValidField('answer')" class="text-danger">Ingrese la respuesta</mat-hint>
     </mat-form-field>
 
-    <div class="p-4 text-center">
+    <div class="p-4 ">
       <button mat-flat-button color="primary" type="submit">
         <mat-icon>save</mat-icon>
         Crear
       </button>
     </div>
   </form>
-
-  <h1>PRUEBA:</h1>
-  <pre>{{registerForm.value | json}}</pre>
-  <pre>{{registerForm.controls['password'].errors| json}}</pre>
 
   <div class="flex justify-content-end p-2">
     <a routerLink="/auth/login" class="btn btn-sm btn-success">Tengo cuenta</a>

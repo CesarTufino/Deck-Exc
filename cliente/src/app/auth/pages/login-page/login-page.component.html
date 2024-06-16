@@ -1,6 +1,6 @@
-  <h1 class="text-center mt-5">Login</h1>
+  <h1 class="mt-5">Login</h1>
 
-  <form class="text-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
     <mat-form-field class="mt-5">
       <mat-label>Correo electr&oacute;nico</mat-label>
@@ -15,7 +15,7 @@
         <mat-hint *ngIf="isValidField('password')" class="text-danger">Contraseña debe ser de m&iacute;nimo 6 caracteres</mat-hint>
     </mat-form-field>
 
-    <div class="p-4 text-center">
+    <div class="p-4">
       <button mat-flat-button color="primary" type="submit">
         <mat-icon>save</mat-icon>
         Ingresar
@@ -27,12 +27,8 @@
     {{errorMessage}}
   </div>
 
-  <a routerLink="/auth/recovery" class="text-center">Olvidaste tu contraseña?</a>
+  <a routerLink="/auth/recovery">Olvidaste tu contraseña?</a>
 
   <div class="flex justify-content-end p-2">
     <a routerLink="/auth/register" class="btn btn-sm btn-success">Crear cuenta</a>
   </div>
-
-  <h1>Prueba</h1>
-<pre>{{this.loginForm.value | json}}</pre>
-<pre>{{this.loginForm.errors | json}}</pre>
