@@ -8,8 +8,8 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule),
-    // canActivate: [PublicGuard],
-    // canMatch: [PublicGuard]
+    canActivate: [PublicGuard],
+    canMatch: [PublicGuard]
   },
   {
     path: 'cards',
