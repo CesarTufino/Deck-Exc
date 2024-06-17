@@ -25,6 +25,7 @@ export class AuthService {
       .pipe(
         map((data: User) => {
           localStorage.setItem('token', data.token);
+          localStorage.setItem('username', data.email)
           this.tokenLogin=data.token;
           this.user=data
           return data;
@@ -54,8 +55,4 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/auth/reset`, { email, answer, password });
   }
 
-  logout() {
-    this.user = undefined;
-    localStorage.clear();
-  }
 }

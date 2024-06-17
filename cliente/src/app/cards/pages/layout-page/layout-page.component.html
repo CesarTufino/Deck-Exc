@@ -22,8 +22,11 @@
       <mat-icon matListItemIcon>menu</mat-icon>
     </button>
     <span class="spacer"></span>
+    <span>{{username}}</span>
+    <span class="spacer"></span>
 
-    <button mat-button (click)="onLogout()">
+
+    <button mat-flat-button (click)="onLogout()">
       Logout
     </button>
   </mat-toolbar>

@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LayoutPageComponent implements OnInit {
 
+  public username = localStorage.getItem('username')?.toString();
+
   public cards: CardInterface[] = [];
   public sidebarItems = [
     { label: 'Listado', icon: 'label', url: './list' },
@@ -26,7 +28,6 @@ export class LayoutPageComponent implements OnInit {
     this.cardSrv.getCards()
       .subscribe(card => {
         this.cards = card;
-        console.log('cards: ', this.cards);
       },
         error => {
           console.log('Error al obtener las tarjetas:', error);
